@@ -6,21 +6,23 @@ git clone https://github.com/CopiniS/api_fuzzy.git
 ```
 
 3. Criar uma pasta venvs dentro de api_fuzzy e digitar o comando dentro de /venvs:
-
+```bash  
    python -m venv api_fuzzy
-
-   
+```
 3. Ativar o ambiente virtual criado anteriormente com o comando:
-
+```bash 
   api_fuzzy\Scripts\Activate
-
+```
 4. Com o ambiente virtual ativado, instalar o Django, a lib para utilizar o .env, e o driver do postgre:
-
+```bash 
   pip install Django
-
+```
+```bash 
   pip install python-decouple
-
+```
+```bash 
   pip install psycopg2-binary
+```
 
 5. Criar um arquivo .env dentro da pasta /projeto/api_fuzzy:
 
