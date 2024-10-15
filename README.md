@@ -6,8 +6,9 @@
 
 3. Criar uma pasta venvs dentro de api_fuzzy e digitar o comando dentro de /venvs:
 
-  python -m venv api_fuzzy
+   python -m venv api_fuzzy
 
+   
 3. Ativar o ambiente virtual criado anteriormente com o comando:
 
   api_fuzzy\Scripts\Activate
