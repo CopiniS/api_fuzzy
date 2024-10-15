@@ -1,9 +1,10 @@
 # projetoFuzzy
 ## clonar repositório:
 1. Digite o comando:
+   
 ```git clone https://github.com/CopiniS/api_fuzzy.git```
 
-2. Criar uma pasta venvs dentro de api_fuzzy e digitar o comando dentro de /venvs:
+3. Criar uma pasta venvs dentro de api_fuzzy e digitar o comando dentro de /venvs:
 
   python -m venv api_fuzzy
 
