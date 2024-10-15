@@ -29,3 +29,13 @@ git clone https://github.com/CopiniS/api_fuzzy.git
    Adicionar nesse .env, os dados que estao no wpp
 
 6. Criar um banco de dado postgre com o nome do banco, o usuario e a senha que estão no .env
+
+7. Fazer as migrações pendentes:
+```bash
+python manage.py migrate
+```
+
+8. Rodar o servidor:
+```bash
+python manage.py runserver
+```
