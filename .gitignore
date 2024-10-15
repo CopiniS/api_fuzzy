@@ -1,0 +1,15 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+*.log
+
+# Django
+*.sqlite3
+*/migrations/*
+!*/migrations/__init__.py
+
+# Environments
+.env
+venvs/
+
