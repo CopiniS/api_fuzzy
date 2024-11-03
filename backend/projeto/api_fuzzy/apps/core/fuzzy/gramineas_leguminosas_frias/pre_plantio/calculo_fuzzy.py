@@ -1,4 +1,5 @@
 from typing import Tuple
+from ...regras.controller_regras import ControllerRegras
 
 class CalculoFuzzy:
 
