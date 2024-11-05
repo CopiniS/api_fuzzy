@@ -1,21 +1,15 @@
 from typing import Tuple
-from fosforo_fuzzy import FosforoFuzzy
-from potassio_fuzzy import PotassioFuzzy
+from .fosforo_fuzzy import FosforoFuzzy
+from .potassio_fuzzy import PotassioFuzzy
 
 class CalculoFuzzy:
 
-    def __init__(self, 
-                 areaPlantada: float,
-                 fosforo: float,
-                 potassio: float,
-                 calcario: float,
-                 ctc: float,
-                 argila: float,):
-        self.fosforo = fosforo
-        self.potassio = potassio
-        self.calcario = calcario
-        self.ctc = ctc
-        self.argila = argila
+    def __init__(self, request):
+        self.fosforo = request.fosforo
+        self.potassio = request.potassio
+        self.calcario = request.calcario
+        self.ctc = request.ctc
+        self.argila = request.argila
 
     def calcarioCalculo() -> Tuple[str, float, float]:
         calcario_tipo: str

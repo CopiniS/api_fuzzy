@@ -39,10 +39,10 @@ class PotassioFuzzy:
         rules = [
             ctrl.Rule(ctc['faixa_1'] & teor_potassio['muito_baixo'], potassio_por_ha['muito_alto']),
             ctrl.Rule(ctc['faixa_1'] & teor_potassio['baixo'], potassio_por_ha['alto']),
-            ctrl.Rule(ctc['faixa_1'] & teor_potassio['pouco_baixo'], potassio_por_ha['alto']),
-            ctrl.Rule(ctc['faixa_1'] & teor_potassio['medio'], potassio_por_ha['medio']),
+            ctrl.Rule(ctc['faixa_1'] & teor_potassio['pouco_baixo'], potassio_por_ha['medio']),
+            ctrl.Rule(ctc['faixa_1'] & teor_potassio['medio'], potassio_por_ha['baixo']),
             ctrl.Rule(ctc['faixa_1'] & teor_potassio['pouco_alto'], potassio_por_ha['baixo']),
-            ctrl.Rule(ctc['faixa_1'] & teor_potassio['alto'], potassio_por_ha['baixo']),
+            ctrl.Rule(ctc['faixa_1'] & teor_potassio['alto'], potassio_por_ha['muito_baixo']),
             ctrl.Rule(ctc['faixa_1'] & teor_potassio['muito_alto'], potassio_por_ha['muito_baixo']),
             ctrl.Rule(ctc['faixa_1'] & teor_potassio['muito_muito_alto'], potassio_por_ha['muito_baixo']),
 
@@ -56,21 +56,21 @@ class PotassioFuzzy:
             ctrl.Rule(ctc['faixa_2'] & teor_potassio['muito_muito_alto'], potassio_por_ha['muito_baixo']),
 
             ctrl.Rule(ctc['faixa_3'] & teor_potassio['muito_baixo'], potassio_por_ha['muito_alto']),
-            ctrl.Rule(ctc['faixa_3'] & teor_potassio['baixo'], potassio_por_ha['alto']),
+            ctrl.Rule(ctc['faixa_3'] & teor_potassio['baixo'], potassio_por_ha['muito_alto']),
             ctrl.Rule(ctc['faixa_3'] & teor_potassio['pouco_baixo'], potassio_por_ha['alto']),
             ctrl.Rule(ctc['faixa_3'] & teor_potassio['medio'], potassio_por_ha['medio']),
-            ctrl.Rule(ctc['faixa_3'] & teor_potassio['pouco_alto'], potassio_por_ha['baixo']),
+            ctrl.Rule(ctc['faixa_3'] & teor_potassio['pouco_alto'], potassio_por_ha['medio']),
             ctrl.Rule(ctc['faixa_3'] & teor_potassio['alto'], potassio_por_ha['baixo']),
-            ctrl.Rule(ctc['faixa_3'] & teor_potassio['muito_alto'], potassio_por_ha['muito_baixo']),
+            ctrl.Rule(ctc['faixa_3'] & teor_potassio['muito_alto'], potassio_por_ha['baixo']),
             ctrl.Rule(ctc['faixa_3'] & teor_potassio['muito_muito_alto'], potassio_por_ha['muito_baixo']),
 
             ctrl.Rule(ctc['faixa_4'] & teor_potassio['muito_baixo'], potassio_por_ha['muito_alto']),
-            ctrl.Rule(ctc['faixa_4'] & teor_potassio['baixo'], potassio_por_ha['alto']),
+            ctrl.Rule(ctc['faixa_4'] & teor_potassio['baixo'], potassio_por_ha['muito_alto']),
             ctrl.Rule(ctc['faixa_4'] & teor_potassio['pouco_baixo'], potassio_por_ha['alto']),
-            ctrl.Rule(ctc['faixa_4'] & teor_potassio['medio'], potassio_por_ha['medio']),
-            ctrl.Rule(ctc['faixa_4'] & teor_potassio['pouco_alto'], potassio_por_ha['baixo']),
+            ctrl.Rule(ctc['faixa_4'] & teor_potassio['medio'], potassio_por_ha['alto']),
+            ctrl.Rule(ctc['faixa_4'] & teor_potassio['pouco_alto'], potassio_por_ha['medio']),
             ctrl.Rule(ctc['faixa_4'] & teor_potassio['alto'], potassio_por_ha['baixo']),
-            ctrl.Rule(ctc['faixa_4'] & teor_potassio['muito_alto'], potassio_por_ha['muito_baixo']),
+            ctrl.Rule(ctc['faixa_4'] & teor_potassio['muito_alto'], potassio_por_ha['baixo']),
             ctrl.Rule(ctc['faixa_4'] & teor_potassio['muito_muito_alto'], potassio_por_ha['muito_baixo'])
         ]
 
