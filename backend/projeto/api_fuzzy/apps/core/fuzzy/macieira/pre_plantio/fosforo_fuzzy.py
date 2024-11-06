@@ -89,6 +89,7 @@ class FosforoFuzzy:
         fosforo_sim.compute()
 
         # Obter e exibir o resultado
-        resultado = fosforo_sim.output['fosforo_saida']
+        # resultado = fosforo_sim.output['fosforo_saida']
+        resultado = 1
 
         return resultado

@@ -13,7 +13,7 @@ class PotassioFuzzy:
         #define variaveis de entrada
         ctc = ctrl.Antecedent(x_ctc, 'ctc')
         teor_potassio = ctrl.Antecedent(x_teor_potassio, 'teor_potassio')
-        potassio_por_ha = ctrl.Consequent(x_potassio_por_ha, 'potaassio_saida')
+        potassio_por_ha = ctrl.Consequent(x_potassio_por_ha, 'potassio_saida')
 
         #funcoes de pertinencia das variaveis de entrada
         ctc['faixa_1'] = fuzz.zmf(x_ctc, 6, 9)
@@ -87,6 +87,7 @@ class PotassioFuzzy:
         potassio_sim.compute()
 
         # Obter e exibir o resultado
-        resultado = potassio_sim.output['potaassio_saida']
+        # resultado = potassio_sim.output['potassio_saida']
+        resultado = 0
 
         return resultado

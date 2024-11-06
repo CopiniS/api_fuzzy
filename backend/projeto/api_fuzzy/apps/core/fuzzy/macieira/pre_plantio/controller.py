@@ -5,11 +5,12 @@ from .potassio_fuzzy import PotassioFuzzy
 class CalculoFuzzy:
 
     def __init__(self, request):
-        self.fosforo = request.fosforo
-        self.potassio = request.potassio
-        self.calcario = request.calcario
-        self.ctc = request.ctc
-        self.argila = request.argila
+        self.fosforo = request.data['fosforo']
+        self.potassio = request.data['potassio']
+        self.calcario = request.data['calcario']
+        self.ctc = request.data['ctc']
+        self.argila = request.data['argila']
+        self.areaPlantada = float(request.data['areaPlantada'])
 
     def calcarioCalculo() -> Tuple[str, float, float]:
         calcario_tipo: str
