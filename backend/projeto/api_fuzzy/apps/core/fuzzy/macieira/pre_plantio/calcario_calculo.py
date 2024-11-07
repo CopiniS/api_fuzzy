@@ -1,8 +1,9 @@
 
 
 class Calcario:
-    def fazCalculo(indice_smp: str) -> float:
+    def fazCalculo(indice_smp: float) -> float:
         if(float(indice_smp) >= 6):
+            print('indice_smp maior que 6', indice_smp)
             return 0
         tabela = {
             4.4: 29.0, 
@@ -23,7 +24,7 @@ class Calcario:
             5.9: 4.2, 
         }
         
-        # Retorna a quantidade exata ou 0 se o índice não estiver na tabela
+        print(tabela.get(indice_smp, 0))
         return tabela.get(indice_smp, 0)
 
    

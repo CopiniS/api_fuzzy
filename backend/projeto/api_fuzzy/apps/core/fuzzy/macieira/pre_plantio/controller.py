@@ -20,7 +20,7 @@ class CalculoFuzzy:
 
         calcario_tipo = 'Calcário Calcítico' #EM MACIEIRAS È MELHOR NAO TER MG NA CALAGEM
 
-        calcario_quantidade_hectare = Calcario.fazCalculo(self.indice_smp) * 1000  #deixar em kg
+        calcario_quantidade_hectare = Calcario.fazCalculo(float(self.indice_smp)) * 1000  #deixar em kg
         calcario_quantidade_total = calcario_quantidade_hectare * self.areaPlantada / 10000
         #aqui fazer a lógica do calculo chamando as regras
         
