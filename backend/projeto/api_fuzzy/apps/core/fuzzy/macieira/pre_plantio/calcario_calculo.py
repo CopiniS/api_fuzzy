@@ -1,8 +1,8 @@
 
 
 class Calcario:
-    def fazCalculo(indice_smp) -> float:
-        if(indice_smp >= 6):
+    def fazCalculo(indice_smp: str) -> float:
+        if(float(indice_smp) >= 6):
             return 0
         tabela = {
             4.4: 29.0, 
