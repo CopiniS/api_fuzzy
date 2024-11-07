@@ -24,6 +24,26 @@ git clone https://github.com/CopiniS/api_fuzzy.git
   pip install psycopg2-binary
 ```
 
+5. Instalar bibliotecas com o ambiente virtual ativado: 
+```bash 
+  pip install scikit-fuzzy
+```
+```bash 
+  pip install djangorestframework
+```
+```bash 
+  pip install numpy
+```
+```bash 
+  pip install scipy
+```
+```bash 
+  pip install packaging
+```
+```bash 
+  pip install networkx
+```
+
 5. Criar um arquivo .env dentro da pasta /projeto/api_fuzzy:
 
    Adicionar nesse .env, os dados que estao no wpp

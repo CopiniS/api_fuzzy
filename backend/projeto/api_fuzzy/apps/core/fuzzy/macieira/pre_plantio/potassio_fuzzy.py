@@ -4,7 +4,7 @@ import skfuzzy as fuzz
 
 class PotassioFuzzy:
 
-    def fazCalculo(ctc_entrada, potassio_entrada) -> float:
+    def fazCalculo(ctc_entrada: str, potassio_entrada: str) -> float:
         #define universo
         x_ctc = np.arange(5, 40, 1)
         x_teor_potassio = np.arange(0, 500, 1)
@@ -80,14 +80,13 @@ class PotassioFuzzy:
 
 
         # Definir as entradas para a simulação
-        potassio_sim.input['ctc'] = ctc_entrada  # Exemplo de valor de CTC
-        potassio_sim.input['teor_potassio'] = potassio_entrada  # Exemplo de valor de potássio
+        potassio_sim.input['ctc'] = float(ctc_entrada)  # Exemplo de valor de CTC
+        potassio_sim.input['teor_potassio'] = float(potassio_entrada)  # Exemplo de valor de potássio
 
         # Calcular a saída
         potassio_sim.compute()
 
         # Obter e exibir o resultado
-        # resultado = potassio_sim.output['potassio_saida']
-        resultado = 0
+        resultado = potassio_sim.output['potassio_saida']  # Verificar o tipo do resultado)
 
         return resultado

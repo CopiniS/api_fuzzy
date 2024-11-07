@@ -4,7 +4,7 @@ import skfuzzy as fuzz
 
 class FosforoFuzzy:
 
-    def fazCalculo(argila_entrada, fosforo_entrada) -> float:
+    def fazCalculo(argila_entrada: str, fosforo_entrada: str) -> float:
         #define universo
         x_argila = np.arange(4, 100, 1)
         x_teor_fosforo = np.arange(0, 100, 1)
@@ -82,14 +82,13 @@ class FosforoFuzzy:
 
 
         # Definir as entradas para a simulação
-        fosforo_sim.input['teor_argila'] = argila_entrada  # Exemplo de valor de argila
-        fosforo_sim.input['teor_fosforo'] = fosforo_entrada  # Exemplo de valor de fosforo
+        fosforo_sim.input['teor_argila'] = float(argila_entrada)  # Exemplo de valor de argila
+        fosforo_sim.input['teor_fosforo'] = float(fosforo_entrada)  # Exemplo de valor de fosforo
 
         # Calcular a saída
         fosforo_sim.compute()
 
         # Obter e exibir o resultado
-        # resultado = fosforo_sim.output['fosforo_saida']
-        resultado = 1
+        resultado = fosforo_sim.output['fosforo_saida']
 
         return resultado
