@@ -1,7 +1,7 @@
 from typing import Tuple
 from .fosforo_fuzzy import FosforoFuzzy
 from .potassio_fuzzy import PotassioFuzzy
-from .calcario_calculo import Calcario
+from ...calculos_gerais.calagem_calculo import Calcario
 
 class CalculoFuzzy:
 
@@ -20,7 +20,7 @@ class CalculoFuzzy:
 
         calcario_tipo = 'Calcário Calcítico' #EM MACIEIRAS È MELHOR NAO TER MG NA CALAGEM
 
-        calcario_quantidade_hectare = Calcario.fazCalculo(float(self.indice_smp)) * 1000  #deixar em kg
+        calcario_quantidade_hectare = Calcario.fazCalculo(float(self.indice_smp), 6, 6.5) * 1000  #deixar em kg
         calcario_quantidade_total = calcario_quantidade_hectare * self.areaPlantada / 10000
         #aqui fazer a lógica do calculo chamando as regras
         
