@@ -9,6 +9,8 @@ class CalculoFuzzy:
         self.fosforo = request.data['fosforo']
         self.potassio = request.data['potassio']
         self.indice_smp = request.data['indice_smp']
+        self.calcio = request.data['calcio']
+        self.magnesio = request.data['magnesio']
         self.ctc = request.data['ctc']
         self.argila = request.data['argila']
         self.areaPlantada = float(request.data['areaPlantada'])
@@ -17,12 +19,27 @@ class CalculoFuzzy:
         calcario_tipo: str
         calcario_quantidade_hectare: float
         calcario_quantidade_total: float
+        ph_escolha = 6
+        ph_desejado = 6.5
+        sat_ca_min = 50 #em %
+        sat_ca_max = 60 #em %
+        sat_mg_min = 15 #em %
+        sat_mg_max = 20 #em %
 
-        calcario_tipo = 'Calcário Calcítico' #EM MACIEIRAS È MELHOR NAO TER MG NA CALAGEM
 
-        calcario_quantidade_hectare = Calcario.fazCalculo(float(self.indice_smp), 6, 6.5) * 1000  #deixar em kg
-        calcario_quantidade_total = calcario_quantidade_hectare * self.areaPlantada / 10000
-        #aqui fazer a lógica do calculo chamando as regras
+        calcario_quantidade_hectare = Calcario.fazCalculo(float(self.indice_smp), ph_escolha, ph_desejado) * 1000  # vezes 1000 para deixar em kg
+        calcario_quantidade_total = calcario_quantidade_hectare * self.areaPlantada / 10000  # divide por 1000 para deixar em hectare
+        
+
+        # calcario_tipo = 'Calcário Calcítico' #EM MACIEIRAS È MELHOR NAO TER MG NA CALAGEM
+        calcario_tipo = Calcario.escolheTipoMisto(calcario_quantidade_hectare, 
+                                                    self.calcio, 
+                                                    self.magnesio, 
+                                                    sat_ca_min,
+                                                    sat_ca_max,
+                                                    sat_mg_min, 
+                                                    sat_mg_max,
+                                                    self.ctc)
         
         return calcario_tipo, calcario_quantidade_hectare, calcario_quantidade_total
 
