@@ -43,6 +43,9 @@ git clone https://github.com/CopiniS/api_fuzzy.git
 ```bash 
   pip install networkx
 ```
+```bash 
+  python -m pip install django-cors-headers
+```
 
 5. Criar um arquivo .env dentro da pasta /projeto/api_fuzzy:
 
