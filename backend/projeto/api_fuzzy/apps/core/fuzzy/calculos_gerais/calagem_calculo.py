@@ -101,50 +101,7 @@ class Calcario:
 
             case _:
                 raise ValueError("ph_desejado inválido. O valor do ph desejado deve ser 5.5 ou 6 ou 6.5")
-            
-    def escolheTipo(calcio: float, magnesio: float, ctc: float, calcario_a_aplicar: float) -> str:
-        saturacao_c = 100 *calcio / ctc
-        saturacao_m = 100 * magnesio / ctc
-    
-
-        #MAGNESIO EM CALCÍTICO
-        magnesio_esperado = 0.2 * ctc 
-        diferenca_magnesio = magnesio_esperado - magnesio
-        constante_magnesio_em_calcitico = 2000000 / 2 # valor retirado de considerações_calcario.txt
-
-        quantidade_calcario_calcitico_necessario = diferenca_magnesio * constante_magnesio_em_calcitico 
-        
-        #Se a diferença de magnesio for negativa também nao precisa de mais magnesio
-        #Se a quantidade de magnesio que contem no calcario calcitico for suficiente
-        #para atender a necessidade de magnesio, o tipo de calcario escolhido vai ser o Calcítico
-        if quantidade_calcario_calcitico_necessario < calcario_a_aplicar:
-            return 'Calcário Calcítico'
-        
-
-        #CALCIO EM DOLOMÍTICO
-        calcio_esperado = 0.6 * ctc # quantidade de calcio que deve ser adicionado para chegar em 60% de saturação
-        diferenca_calcio = calcio_esperado - calcio #diferença de calcio esperado e o calcio que está no solo
-        constante_calcio_em_dolomitico = 2000000 / 25 # valor retirado de considerações_calcario.txt. 2.000.000 é o volume de solo em dm³ e 25 é a qunatidade de calcio em cmolc/kg de calcário dolomítico
-
-        quantidade_calcario_dolomitico_necessario = diferenca_calcio * constante_calcio_em_dolomitico
-
-        #Se a quantidade de calcio que contem no calcario dolomitico for suficiente
-        #para atender a necessidade de calcio, o tipo de calcario escolhido vai ser o Dolomitico
-        #Se a diferença de calcio for negativa também nao precisa de mais calcio
-        if quantidade_calcario_dolomitico_necessario < calcario_a_aplicar:
-            return 'Calcário Dolomítico'
-        
-
-        #CALCIO EM AMBOS e MAGNESIO EM AMBOS
-
-
-
-        grau_de_saturacao_c = saturacao_c / 60 #Quanto mais perto de 1, mais correto
-        grau_de_saturacao_m = saturacao_m / 20 #Quanto mais perto de 1, mais correto
-
-
-        return 'Calcário Dolomítico e Calcário Calcítico'
-
+       
     def escolheTipoMisto(
         calcario_por_ha: int, 
         ca_inicial: float, #quantidade que vem do laudo em cmolc/dm³
