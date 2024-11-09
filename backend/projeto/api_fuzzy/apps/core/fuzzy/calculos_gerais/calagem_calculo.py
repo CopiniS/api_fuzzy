@@ -2,6 +2,7 @@
 
 class Calcario:
     def fazCalculo(indice_smp: float, ph_escolha: float, ph_desejado: float) -> float:
+        #Verifica se o ph de escolha é maior que o smp, se for, não precisa de adição de calcario
         if(float(indice_smp) >= ph_escolha):
             return 0
         match ph_desejado:
@@ -42,3 +43,32 @@ class Calcario:
 
             case _:
                 raise ValueError("ph_desejado inválido. O valor do ph desejado deve ser 5.5 ou 6 ou 6.5")
+            
+    def escolheTipo(calcio: float, magnesio: float, ctc: float, calcario_a_aplicar: float) -> str:
+        saturacao_c = 100 *calcio / ctc
+        saturacao_m = 100 * magnesio / ctc
+    
+        magnesio_esperado = 0.2 * ctc 
+        diferenca_magnesio = magnesio_esperado - magnesio
+
+        quantidade_calcario_calcitico_necessario = diferenca_magnesio * 2000000 / 2 
+        
+        #Se a diferença de magnesio for negativa também nao precisa de mais magnesio
+        #Se a quantidade de magnesio que contem no calcario calcitico for suficiente
+        #para atender a necessidade de magnesio, o tipo de calcario escolhido vai ser o Calcítico
+        if quantidade_calcario_calcitico_necessario < calcario_a_aplicar:
+            return 'Calcário Calcítico'
+        
+        calcio_esperado = 0.6 * ctc 
+        diferenca_calcio = calcio_esperado - calcio
+
+        quantidade_calcario_dolomitico_necessario = diferenca_calcio * 2000000 / 25
+
+        #Se a diferença de calcio for negativa também nao precisa de mais calcio
+        #Se a quantidade de calcio que contem no calcario dolomitico for suficiente
+        #para atender a necessidade de calcio, o tipo de calcario escolhido vai ser o Dolomitico
+        if quantidade_calcario_dolomitico_necessario < calcario_a_aplicar:
+            return 'Calcário Dolomítico'
+
+        #falta só a excessão para mistura dos dois
+        return 'Calcário Dolomítico e Calcário Calcítico'

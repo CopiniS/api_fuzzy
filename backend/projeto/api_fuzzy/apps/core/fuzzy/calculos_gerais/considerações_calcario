@@ -1,0 +1,34 @@
+Faremos algumas considerações para determinar o tipo do calcario, teremos que definir a quantidade de calcio e magnesio que
+o Calcario calcítico e o Calcario dolomítico possuem.
+
+CALCÍTICO:
+    cmolc de calcio por kg de calcario: 35 cmolc/kg
+    cmolc de magnesio por kg de calcario: 2 cmolc/kg
+
+Dolomítico:
+    cmolc de calcio por kg de calcario: 25 cmolc/kg
+    cmolc de magnesio por kg de calcario: 20 cmolc/kg
+
+
+volume em dm³:
+    profundidade do solo em metros: 0,2 m
+    area de plantio: 10.000 m²
+
+    volume: 0,2 * 10.000 = 2.000 m³ = 2.000.000 dm³
+
+
+OU SEJA:
+    CALCÍTICO: 
+        calcio: 
+            quant_kg_de_calcario * 35 / 2.000.000 cmolc/dm³
+        magnesio:
+            quant_kg_de_calcario * 2 / 2.000.000 cmolc/dm³
+
+    Dolomítico:
+        calcio: 
+            quant_kg_de_calcario * 25 / 2.000.000 cmolc/dm³
+        magnesio:
+            quant_kg_de_calcario * 20 / 2.000.000 cmolc/dm³
+
+
+
