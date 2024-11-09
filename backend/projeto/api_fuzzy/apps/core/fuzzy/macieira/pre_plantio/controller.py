@@ -43,7 +43,7 @@ class CalculoFuzzy:
         p_quantidade_total: float
 
         p_quantidade_hectare = FosforoFuzzy.fazCalculo(self.argila, self.fosforo)
-        p_quantidade_total = p_quantidade_hectare * self.areaPlantada / 10000
+        p_quantidade_total = p_quantidade_hectare * self.areaPlantada 
 
         return p_quantidade_hectare, p_quantidade_total
 
@@ -52,6 +52,6 @@ class CalculoFuzzy:
         k_quantidade_total: float
 
         k_quantidade_hectare = PotassioFuzzy.fazCalculo(self.ctc, self.potassio)
-        k_quantidade_total = k_quantidade_hectare * self.areaPlantada / 10000
+        k_quantidade_total = k_quantidade_hectare * self.areaPlantada 
 
         return k_quantidade_hectare, k_quantidade_total

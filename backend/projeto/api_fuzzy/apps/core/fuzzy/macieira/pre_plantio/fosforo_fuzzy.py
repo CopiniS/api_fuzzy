@@ -7,7 +7,7 @@ class FosforoFuzzy:
     def fazCalculo(argila_entrada: str, fosforo_entrada: str) -> float:
         #define universo
         x_argila = np.arange(4, 100, 1)
-        x_teor_fosforo = np.arange(0, 100, 1)
+        x_teor_fosforo = np.arange(0, 70, 0.1)
         x_fosforo_por_ha  = np.arange(0, 250, 1)
 
 
@@ -23,57 +23,66 @@ class FosforoFuzzy:
         argila['faixa_3'] = fuzz.trapmf(x_argila, [35, 45, 55, 65])
         argila['faixa_4'] = fuzz.smf(x_argila, 55, 65)
 
-        teor_fosforo['muito_baixo'] = fuzz.zmf(x_teor_fosforo, 20, 30)
-        teor_fosforo['baixo'] = fuzz.trapmf(x_teor_fosforo, [20, 30, 40, 50])
-        teor_fosforo['pouco_baixo'] = fuzz.trapmf(x_teor_fosforo, [40, 50, 60, 70])
-        teor_fosforo['medio'] = fuzz.trapmf(x_teor_fosforo, [60, 70, 90, 100])
-        teor_fosforo['pouco_alto'] = fuzz.trapmf(x_teor_fosforo, [90, 100, 110, 120])
-        teor_fosforo['alto'] = fuzz.trapmf(x_teor_fosforo, [110, 120, 160, 180])
-        teor_fosforo['muito_alto'] = fuzz.trapmf(x_teor_fosforo, [160, 200, 250, 270])
-        teor_fosforo['muito_muito_alto'] = fuzz.smf(x_teor_fosforo, 250, 270)
+        teor_fosforo['muito_baixo'] = fuzz.zmf(x_teor_fosforo, 0, 3)
+        teor_fosforo['baixo'] = fuzz.trimf(x_teor_fosforo, [3, 6, 9])
+        teor_fosforo['pouco_baixo'] = fuzz.trimf(x_teor_fosforo, [6, 9, 12])
+        teor_fosforo['medio'] = fuzz.trimf(x_teor_fosforo, [9, 15, 21])
+        teor_fosforo['pouco_alto'] = fuzz.trimf(x_teor_fosforo, [15, 21, 27])
+        teor_fosforo['alto'] = fuzz.trimf(x_teor_fosforo, [18, 30, 42])
+        teor_fosforo['muito_alto'] = fuzz.smf(x_teor_fosforo, 36, 60)
+        teor_fosforo['muito_muito_alto'] = fuzz.smf(x_teor_fosforo, 50, 70)
 
 
-        fosforo_por_ha['muito_baixo'] = fuzz.zmf(x_fosforo_por_ha, 20, 40)
-        fosforo_por_ha['baixo'] = fuzz.trapmf(x_fosforo_por_ha, [20, 40, 60, 80])
-        fosforo_por_ha['medio'] = fuzz.trapmf(x_fosforo_por_ha, [60, 80, 90, 110])
-        fosforo_por_ha['alto'] = fuzz.trapmf(x_fosforo_por_ha, [90, 110, 130, 140])
-        fosforo_por_ha['muito_alto'] = fuzz.trapmf(x_fosforo_por_ha, [130, 140, 150, 150])
+        fosforo_por_ha['muito_baixo'] = fuzz.zmf(x_fosforo_por_ha, 5, 10)
+        fosforo_por_ha['baixo'] = fuzz.trapmf(x_fosforo_por_ha, [50, 70, 90, 110])
+        fosforo_por_ha['medio'] = fuzz.trapmf(x_fosforo_por_ha, [90, 110, 130, 150])
+        fosforo_por_ha['alto'] = fuzz.trapmf(x_fosforo_por_ha, [130, 150, 170, 190])
+        fosforo_por_ha['muito_alto'] = fuzz.smf(x_fosforo_por_ha, 200, 250)
 
 
         # Definindo o sistema de regras
         rules = []
 
+        # Faixa 1 - Argila muito alta
         rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['muito_baixo'], fosforo_por_ha['muito_alto']))
         rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['baixo'], fosforo_por_ha['alto']))
-        rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['alto']))
-        rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['medio'], fosforo_por_ha['medio']))
+        rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['medio']))
+        rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['medio'], fosforo_por_ha['baixo']))
         rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['pouco_alto'], fosforo_por_ha['baixo']))
         rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['alto'], fosforo_por_ha['baixo']))
         rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['muito_alto'], fosforo_por_ha['muito_baixo']))
+        rules.append(ctrl.Rule(argila['faixa_1'] & teor_fosforo['muito_muito_alto'], fosforo_por_ha['muito_baixo']))
 
+        # Faixa 2 - Argila alta
         rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['muito_baixo'], fosforo_por_ha['muito_alto']))
         rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['baixo'], fosforo_por_ha['alto']))
-        rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['alto']))
-        rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['medio'], fosforo_por_ha['medio']))
+        rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['medio']))
+        rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['medio'], fosforo_por_ha['baixo']))
         rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['pouco_alto'], fosforo_por_ha['baixo']))
-        rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['alto'], fosforo_por_ha['baixo']))
+        rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['alto'], fosforo_por_ha['muito_baixo']))
         rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['muito_alto'], fosforo_por_ha['muito_baixo']))
+        rules.append(ctrl.Rule(argila['faixa_2'] & teor_fosforo['muito_muito_alto'], fosforo_por_ha['muito_baixo']))
 
+        # Faixa 3 - Argila média
         rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['muito_baixo'], fosforo_por_ha['muito_alto']))
         rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['baixo'], fosforo_por_ha['alto']))
-        rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['alto']))
-        rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['medio'], fosforo_por_ha['medio']))
+        rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['medio']))
+        rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['medio'], fosforo_por_ha['baixo']))
         rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['pouco_alto'], fosforo_por_ha['baixo']))
-        rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['alto'], fosforo_por_ha['baixo']))
+        rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['alto'], fosforo_por_ha['muito_baixo']))
         rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['muito_alto'], fosforo_por_ha['muito_baixo']))
+        rules.append(ctrl.Rule(argila['faixa_3'] & teor_fosforo['muito_muito_alto'], fosforo_por_ha['muito_baixo']))
 
+        # Faixa 4 - Argila baixa
         rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['muito_baixo'], fosforo_por_ha['muito_alto']))
         rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['baixo'], fosforo_por_ha['alto']))
-        rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['alto']))
+        rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['pouco_baixo'], fosforo_por_ha['medio']))
         rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['medio'], fosforo_por_ha['medio']))
         rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['pouco_alto'], fosforo_por_ha['baixo']))
-        rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['alto'], fosforo_por_ha['baixo']))
+        rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['alto'], fosforo_por_ha['muito_baixo']))
         rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['muito_alto'], fosforo_por_ha['muito_baixo']))
+        rules.append(ctrl.Rule(argila['faixa_4'] & teor_fosforo['muito_muito_alto'], fosforo_por_ha['muito_baixo']))
+
 
 
         # Criar o sistema de controle fuzzy
