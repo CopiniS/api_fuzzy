@@ -18,7 +18,7 @@ class Calcario:
     ctc: float
     ) -> Dict[str, Tuple[float, float]]:
         
-        calcario_por_ha = Calcario.fazCalculo(indice_smp, ph_escolha, ph_desejado)
+        calcario_por_ha = int(Calcario.fazCalculo(indice_smp, ph_escolha, ph_desejado) * 1000)
         melhor_calcitico, melhor_dolomitico, melhor_sat_ca_final, melhor_sat_mg_final, erro_total_minimo = Calcario.escolheTipoMisto(
             calcario_por_ha, 
             ca_inicial, 
@@ -33,36 +33,35 @@ class Calcario:
         print('melhor_sat_ca_final: ', melhor_sat_ca_final)
         print('melhor_sat_mg_final: ', melhor_sat_mg_final)
         print('erro_total_minimo: ', erro_total_minimo) 
+        print('melhor_calcitico: ', melhor_calcitico)
+        print('melhor_dolomitico: ', melhor_dolomitico)
 
         
         total = calcario_por_ha * area_plantada
-        if melhor_calcitico == 0 and melhor_dolomitico == 0: #Esse é o padrão. Caso mg e ca ja estejam satisfeitos
+        if melhor_dolomitico == 0: #Esse é o padrão. Caso mg e ca ja estejam satisfeitos, ou seja se melhor calcitico for 0 e melhor dolomitico for 0
             return {
-                'Calcario Calcítico': (calcario_por_ha, total)
+                'Calcario Calcítico': (calcario_por_ha, total),
+                'Calcario Dolomitico': (0, 0)
             }
 
         if melhor_calcitico == 0:
             return {
+                'Calcario Calcítico': (0, 0),
                 'Calcario Dolomitico': (calcario_por_ha, total)
             }
         
-        if melhor_dolomitico == 0:
-            return {
-                'Calcario Calcítico': (calcario_por_ha, total)
-            }
-        
-        por_ha_calcitico = calcario_por_ha * melhor_calcitico
-        total_calcitico = por_ha_calcitico * area_plantada
-        por_ha_domotico = calcario_por_ha * melhor_dolomitico
-        total_domotico = por_ha_domotico * area_plantada
+        total_calcitico = melhor_calcitico * area_plantada
+        total_domotico = melhor_dolomitico * area_plantada
         return {
-            'Calcario Calcítico': (por_ha_calcitico, total_calcitico),
-            'Calcario Dolomitico': (por_ha_domotico, total_domotico)
+            'Calcario Calcítico': (melhor_calcitico, total_calcitico),
+            'Calcario Dolomitico': (melhor_dolomitico, total_domotico)
         }
         
     def fazCalculo(indice_smp: float, ph_escolha: float, ph_desejado: float) -> float:
         #Verifica se o ph de escolha é maior que o smp, se for, não precisa de adição de calcario
-        if(float(indice_smp) >= ph_escolha):
+        if(indice_smp >= ph_escolha):
+            print('indice_smp: ', indice_smp)
+            print('ph_escolha: ', ph_escolha)
             return 0
         match ph_desejado:
             case 5.5:
@@ -147,9 +146,9 @@ class Calcario:
         return 'Calcário Dolomítico e Calcário Calcítico'
 
     def escolheTipoMisto(
-        calcario_por_ha: float, 
-        ca_inicial: float, 
-        mg_inicial: float, 
+        calcario_por_ha: int, 
+        ca_inicial: float, #quantidade que vem do laudo em cmolc/dm³
+        mg_inicial: float, #quantidade que vem do laudo em cmolc/dm³
         sat_ca_min: float,
         sat_ca_max: float,
         sat_mg_min: float, 
@@ -158,19 +157,28 @@ class Calcario:
     ) -> Tuple[float, float, float, float, float]:
         #CONSTANTES
         constante_profundidade_metros = 0.2  # Profundidade do solo em metros
-        constante_ca_calcitico = 35  # cmolc/kg
-        constante_ca_dolomitico = 25  # cmolc/kg
-        constante_mg_calcitico = 2  # cmolc/kg
-        constante_mg_dolomitico = 20  # cmolc/kg
-        constante_volume_por_ha = 10.000 * constante_profundidade_metros * 1000 #dm³ por hectare
-        sat_ca_inicial = ca_inicial / ctc
-        sat_mg_inicial = mg_inicial / ctc
+        constante_ca_calcitico = 35  # quantidade de calcio em cmolc por kg de carcario calcitico
+        constante_ca_dolomitico = 25  # quantidade de calcio em cmolc por kg de carcario dolomitico
+        constante_mg_calcitico = 2  # quantidade de mg em cmolc por kg de carcario calcitico
+        constante_mg_dolomitico = 20  # quantidade de mg em cmolc por kg de carcario dolomitico
+        constante_volume_por_ha = 10.000 * constante_profundidade_metros * 1000 # volume do solo em dm³
+        sat_ca_inicial = 100 * ca_inicial / ctc  #saturaçao de calcio inicial
+        sat_mg_inicial = 100 * mg_inicial / ctc   #saturaçao de mg inicial
+
+        print('calcario_por_ha: ', calcario_por_ha)
+        print('sat_ca_inicial: ', sat_ca_inicial)
+        print('sat_mg_inicial: ', sat_mg_inicial)
 
         # Calcula os incrementos de ca e mg para cada divisão de calcitico e dolomitico
-        increment_ca_calcitico = constante_ca_calcitico / constante_volume_por_ha   #cmolc/dm³
-        increment_ca_dolomitico = constante_ca_dolomitico / constante_volume_por_ha #cmolc/dm³
-        increment_mg_calcitico = constante_mg_calcitico / constante_volume_por_ha   #cmolc/dm³
-        increment_mg_dolomitico = constante_mg_dolomitico / constante_volume_por_ha #cmolc/dm³
+        increment_ca_calcitico = constante_ca_calcitico / constante_volume_por_ha   # a cada 1 kg aumentado de calcario calcitico, aumenta-se esse valor de ca  em cmolc/dm³
+        increment_ca_dolomitico = constante_ca_dolomitico / constante_volume_por_ha # a cada 1 kg aumentado de calcario dolomitico, aumenta-se esse valor de ca em cmolc/dm³
+        increment_mg_calcitico = constante_mg_calcitico / constante_volume_por_ha   # a cada 1 kg aumentado de calcario calcitico, aumenta-se esse valor de mg em cmolc/dm³
+        increment_mg_dolomitico = constante_mg_dolomitico / constante_volume_por_ha # a cada 1 kg aumentado de calcario dolomitico, aumenta-se esse valor de mg em cmolc/dm³
+
+        print('increment_ca_calcitico: ', increment_ca_calcitico)
+        print('increment_ca_dolomitico: ', increment_ca_dolomitico)
+        print('increment_mg_calcitico: ', increment_mg_calcitico)
+        print('increment_mg_dolomitico: ', increment_mg_dolomitico)
 
 
         
@@ -183,18 +191,18 @@ class Calcario:
             dolomitico = calcario_por_ha - calcitico
             
             # Calcula ca e mg após aplicar os incrementos com a divisão atual de calcitico e dolomitico
-            ca_final = sat_ca_inicial + calcitico * increment_ca_calcitico + dolomitico * increment_ca_dolomitico
-            mg_final = sat_mg_inicial + calcitico * increment_mg_calcitico + dolomitico * increment_mg_dolomitico
+            sat_ca_final = sat_ca_inicial + calcitico * increment_ca_calcitico + dolomitico * increment_ca_dolomitico
+            sat_mg_final = sat_mg_inicial + calcitico * increment_mg_calcitico + dolomitico * increment_mg_dolomitico
 
             # Calcula os erros se ca ou mg estiverem fora de seus intervalos
-            erro_ca = max(0, sat_ca_min - ca_final, ca_final - sat_ca_max)  # Penalidade se ca estiver fora do intervalo [sat_ca_min, sat_ca_max]
-            erro_mg = max(0, sat_mg_min - mg_final, mg_final - sat_mg_max)  # Penalidade se mg estiver fora do intervalo [sat_mg_min, sat_mg_max]
+            erro_ca = max(0, sat_ca_min - sat_ca_final, sat_ca_final - sat_ca_max)  # Penalidade se ca estiver fora do intervalo [sat_ca_min, sat_ca_max]
+            erro_mg = max(0, sat_mg_min - sat_mg_final, sat_mg_final - sat_mg_max)  # Penalidade se mg estiver fora do intervalo [sat_mg_min, sat_mg_max]
             erro_total = erro_ca + erro_mg  # Soma dos erros
 
             # Verifica se a divisão atual é melhor que a anterior, minimizando o erro total
             if erro_total < erro_total_minimo:
                 melhor_calcitico, melhor_dolomitico = calcitico, dolomitico
-                melhor_sat_ca_final, melhor_sat_mg_final = ca_final, mg_final
+                melhor_sat_ca_final, melhor_sat_mg_final = sat_ca_final, sat_mg_final
                 erro_total_minimo = erro_total
 
         return melhor_calcitico, melhor_dolomitico, melhor_sat_ca_final, melhor_sat_mg_final, erro_total_minimo
