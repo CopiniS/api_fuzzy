@@ -5,7 +5,7 @@
 git clone https://github.com/CopiniS/api_fuzzy.git
 ```
 
-3. Criar uma pasta venvs dentro de api_fuzzy e digitar o comando dentro de /venvs:
+3. Criar uma pasta venvs dentro de /backend e digitar o comando dentro de /venvs:
 ```bash  
    python -m venv api_fuzzy
 ```
