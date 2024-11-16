@@ -5,6 +5,7 @@ from typing import Dict, Tuple
 
 class Calcario:
     def defineCalagem(  
+    ph_agua: float,
     area_plantada: float,
     indice_smp: float, 
     ph_escolha: float, 
@@ -18,7 +19,7 @@ class Calcario:
     ctc: float
     ) -> Dict[str, Tuple[float, float]]:
         
-        calcario_por_ha = int(Calcario.fazCalculo(indice_smp, ph_escolha, ph_desejado) * 1000)
+        calcario_por_ha = int(Calcario.fazCalculo(ph_agua, indice_smp, ph_escolha, ph_desejado) * 1000)
         melhor_calcitico, melhor_dolomitico, melhor_sat_ca_final, melhor_sat_mg_final, erro_total_minimo = Calcario.escolheTipoMisto(
             calcario_por_ha, 
             ca_inicial, 
@@ -57,10 +58,10 @@ class Calcario:
             'Calcario Dolomitico': (melhor_dolomitico, total_domotico)
         }
         
-    def fazCalculo(indice_smp: float, ph_escolha: float, ph_desejado: float) -> float:
+    def fazCalculo(ph_agua: float, indice_smp: float, ph_escolha: float, ph_desejado: float) -> float:
         #Verifica se o ph de escolha é maior que o smp, se for, não precisa de adição de calcario
-        if(indice_smp >= ph_escolha):
-            print('indice_smp: ', indice_smp)
+        if(ph_agua >= ph_escolha):
+            print('ph_agua: ', ph_agua)
             print('ph_escolha: ', ph_escolha)
             return 0
         match ph_desejado:
