@@ -14,6 +14,7 @@ class CalculoFuzzy:
         self.ctc = float(request.data['ctc'])
         self.argila = request.data['argila']
         self.areaPlantada = float(request.data['areaPlantada'])
+        self.ph_agua = float(request.data['ph_agua'])
 
     def calcarioCalculo(self) -> Tuple[str, float, float]:
         ph_escolha = 6
@@ -24,6 +25,7 @@ class CalculoFuzzy:
         sat_mg_max = 20 #em %
 
         calagem = Calcario.defineCalagem(
+                    ph_agua=self.ph_agua,
                     area_plantada=self.areaPlantada,
                     indice_smp=self.indice_smp, 
                     ph_escolha=ph_escolha, 
