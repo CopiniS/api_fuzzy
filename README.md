@@ -79,9 +79,9 @@ python manage.py runserver
 
 1. Macieiras:
    1. Pré-plantio:
-      PATH: http://localhost:8000/macieiras/pre-plantio/
-      METHOD: POST
-      LAYOUT BODY: {
+      - PATH: http://localhost:8000/macieiras/pre-plantio/
+      - METHOD: POST
+      - LAYOUT BODY: {
                   	"ph_agua" : "5.78",
                   	"fosforo": "9.6",
                   	"potassio": "117",
@@ -95,9 +95,9 @@ python manage.py runserver
 
 2. Consorciação de gramíneas e leguminosas de estação fria:
    1. Pré-plantio:
-      PATH: http://localhost:8000/gramineas-leguminosas-frias/pre-plantio/
-      METHOD: POST
-      LAYOUT BODY: {
+      - PATH: http://localhost:8000/gramineas-leguminosas-frias/pre-plantio/
+      - METHOD: POST
+      - LAYOUT BODY: {
                   	"ph_agua" : "5.78",
                   	"fosforo": "9.6",
                   	"potassio": "117",
