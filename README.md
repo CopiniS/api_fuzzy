@@ -47,12 +47,21 @@ git clone https://github.com/CopiniS/api_fuzzy.git
   python -m pip install django-cors-headers
 ```
 
-*O .ENV E O BANCO DE DADOS SERÃO USADOS APENAS NO PROJETO DE PESQUISA
-NÃO A NECESSIDADE DESSAS PRÓXIMAS LINHAS PARA TESTAR A API POR ENQUANTO*
-
 5. Criar um arquivo .env dentro da pasta /projeto/api_fuzzy:
 
-   Adicionar nesse .env, os dados que estao no wpp
+   Adicionar nesse .env, os dados:
+
+```bash 
+SECRET_KEY=django-insecure-1#5#^@4cw3)890)nc78q#8xz40ftj1%kk(go0n1(3fmlsr)(9w
+DB_NAME = api_fuzzy
+DB_USER = postgres
+DB_PASSWORD = admin
+DB_HOST = localhost
+DB_PORT = 5432
+```
+
+*O BANCO DE DADOS SERÁ USADO APENAS NO PROJETO DE PESQUISA
+NÃO A NECESSIDADE DESSAS PRÓXIMAS LINHAS PARA TESTAR A API POR ENQUANTO*
 
 6. Criar um banco de dado postgre com o nome do banco, o usuario e a senha que estão no .env
 
