@@ -1,5 +1,5 @@
 # projetoFuzzy
-## clonar repositório:
+## Executar a Api:
 1. Digite o comando:
 ```bash   
 git clone https://github.com/CopiniS/api_fuzzy.git
@@ -74,3 +74,46 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+
+## Rotas da Api:
+
+1. Macieiras:
+   1. Pré-plantio:
+      PATH: http://localhost:8000/macieiras/pre-plantio/
+      METHOD: POST
+      LAYOUT BODY: {
+                  	"ph_agua" : "5.78",
+                  	"fosforo": "9.6",
+                  	"potassio": "117",
+                  	"calcio": "1",
+                  	"magnesio": "1.19",
+                  	"indice_smp": "5",
+                  	"ctc": "19.52",
+                  	"argila": "35",
+                  	"areaPlantada": "10"
+                  }
+
+2. Consorciação de gramíneas e leguminosas de estação fria:
+   1. Pré-plantio:
+      PATH: http://localhost:8000/gramineas-leguminosas-frias/pre-plantio/
+      METHOD: POST
+      LAYOUT BODY: {
+                  	"ph_agua" : "5.78",
+                  	"fosforo": "9.6",
+                  	"potassio": "117",
+                  	"calcio": "1",
+                  	"magnesio": "1.19",
+                  	"indice_smp": "5",
+                  	"ctc": "19.52",
+                  	"argila": "35",
+                  	"areaPlantada": "10"
+                  }
+      
+
+   
+
+
+
+
+
+   
