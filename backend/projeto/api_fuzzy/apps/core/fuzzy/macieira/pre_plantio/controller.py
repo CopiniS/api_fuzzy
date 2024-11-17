@@ -8,7 +8,7 @@ class CalculoFuzzy:
     def __init__(self, request):
         self.fosforo = request.data['fosforo']
         self.potassio = request.data['potassio']
-        self.indice_smp = float(request.data['indice_smp'])
+        self.indice_smp = round(float(request.data['indice_smp']), 1)
         self.calcio = float(request.data['calcio'])
         self.magnesio = float(request.data['magnesio'])
         self.ctc = float(request.data['ctc'])
