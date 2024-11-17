@@ -47,6 +47,9 @@ git clone https://github.com/CopiniS/api_fuzzy.git
   python -m pip install django-cors-headers
 ```
 
+*O .ENV E O BANCO DE DADOS SERÃO USADOS APENAS NO PROJETO DE PESQUISA
+NÃO A NECESSIDADE DESSAS PRÓXIMAS LINHAS PARA TESTAR A API POR ENQUANTO*
+
 5. Criar um arquivo .env dentro da pasta /projeto/api_fuzzy:
 
    Adicionar nesse .env, os dados que estao no wpp
