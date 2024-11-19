@@ -30,7 +30,7 @@ class FosforoFuzzyG:
         teor_fosforo['muito_alto'] = fuzz.smf(x_teor_fosforo, 36, 60)
         teor_fosforo['muito_muito_alto'] = fuzz.smf(x_teor_fosforo, 50, 70)
 
-        fosforo_por_ha['muito_baixo'] = fuzz.zmf(x_fosforo_por_ha, 5, 10)
+        fosforo_por_ha['muito_baixo'] = fuzz.zmf(x_fosforo_por_ha, 30, 50)
         fosforo_por_ha['baixo'] = fuzz.trapmf(x_fosforo_por_ha, [30, 50, 70, 90])
         fosforo_por_ha['medio'] = fuzz.trapmf(x_fosforo_por_ha, [70, 90, 110, 130])
         fosforo_por_ha['alto'] = fuzz.trapmf(x_fosforo_por_ha, [110, 130, 150, 170])
